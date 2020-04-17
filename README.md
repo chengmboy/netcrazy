@@ -5,7 +5,7 @@ springboot的网络性能压榨
 CentOS Linux release 7.6.1810 (Core)
 Linux version 3.10.0-957.21.3.e17.x86_64
 
-![tcp_max_conn](/Users/chengmeinan/project/netcrazy/image/tcp_max_conn.png)
+![tcp_max_conn](image/tcp_max_conn.png)
 
 结论：
 
