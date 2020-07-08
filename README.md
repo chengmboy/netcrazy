@@ -17,4 +17,100 @@ State      Recv-Q Send-Q Local Address:Port               Peer Address:Port
 LISTEN     0      2         [::]:8080                  [::]:*
 ```
 
+性能测试
 
+服务器主机参数 2C8G 千兆带宽 openjdk-1.8
+
+测试主机参数 2C8G
+
+socket 参数 backlog 10000 (tomcat[acceptAcount=10000,MaxConnections=10000]、jetty[server.jetty.acceptQueueSize=10000]、undertow[server.undertow.backlog=10000])
+
+虚拟机参数  -Xmx2G -Xms2G 
+
+预热 三次1B  wrk -c 1000 -d 30s --timeout=30s 
+
+数据量1B 压测30s
+
+10000连接
+
+undertow 30403、30824、31571
+
+tomcat 20317、20864、20502
+
+jetty 20188、20911、20591
+
+1000连接
+
+undertow 33253、34083、33393
+
+tomcat      22597、22399、22274
+
+jetty           21381、22250、22269
+
+100连接
+
+undertow 23246、23690、25973
+
+tomcat      15008、15089、15017
+
+jetty      17174、17628、18162
+
+
+
+数据量 2560B (2.5K)
+
+10000连接
+
+undertow 9286、9088、10012
+
+tomcat 10048、10159、10048
+
+jetty    4307、6420、6358
+
+1000连接 
+
+undertow  9349、9576、8976
+
+tomcat  9860、10550、10629
+
+jetty 6665、6597、6795
+
+100连接
+
+undertow 8334、7974、8014
+
+tomcat 8927、8861、9169
+
+jetty     6622、6877、6736
+
+
+
+数据量 256000B (250K)
+
+10000连接
+
+undertow 201、204、199.38
+
+tomcat 197、196、200
+
+jetty   8.68、8.12、8.73
+
+1000连接 
+
+undertow 196/48、205/50、211/51 
+
+tomcat 225、222、217
+
+jetty  8.62、8.29、8.48
+
+100连接
+
+undertow 197/48、194/47、196/48
+
+tomcat 228、227、223
+
+jetty 9.92、9.96、10.09
+
+
+
+tomcat占用内存高，连接多的时候time_wait多，undertow内存占用大概是tomcat的一半，jetty消耗内存最大，gc频繁
