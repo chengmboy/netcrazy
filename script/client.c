@@ -27,6 +27,6 @@ int main(int argc,char *argv[])
      }
      sleep(st);
      close(server_fd);
-    //do
+    //do do
     return 1;
 }
